@@ -1,0 +1,10 @@
+---
+- version: v1alpha1
+  group: helmoperator.example.com
+  kind: HelmOperator
+  role: helmoperator
+  finalizer:
+    name: helmoperator.example.com/finalizer
+    vars:
+      helmoperator_resource_state: absent
+#+kubebuilder:scaffold:watch

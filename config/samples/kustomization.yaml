@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- helmoperator_v1alpha1_helmoperator.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples
