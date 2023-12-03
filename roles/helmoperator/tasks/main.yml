@@ -1,11 +1,7 @@
 ---
 - name: Register repo
-  kubernetes.core.helm_repository:
-    binary_path: "{{ helm_binary }}"
-    name: "{{ meta.repo_name }}"
-    repo_url: "{{ meta.repo_url }}"
-    repo_state: present
-  become: false
+  include_tasks: "register_repo.yml"
+  when: meta.repo_name is defined 
 - name: Deploy chart from local path
   kubernetes.core.helm:
     binary_path: "{{ helm_binary }}"

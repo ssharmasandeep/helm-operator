@@ -7,15 +7,15 @@ metadata:
     app.kubernetes.io/part-of: helm-operator
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: helm-operator
-  name: helmoperator-ueransim
+  name: helmoperator-free5gc
 spec:
   meta:
     context: /opt/ansible/config 
     role: helmoperator
     chart_release_name: test 
-    chart_name: ueransim 
-    chart_version: 2.0.12
-    helm_namespace: ueransim
+    chart_name: free5gc 
+    chart_version: 1.0.2 
+    helm_namespace: free5gc
     repo_name: myhelmrepo
     repo_url: https://ssharmasandeep.github.io/myhelmrepo 
     role_path: /opt/ansible

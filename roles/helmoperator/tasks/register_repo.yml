@@ -1,0 +1,24 @@
+---
+- name: Get Helm Repo List
+  command: "{{ helm_binary }} repo list --output json"
+  register: helm_repo_list
+  ignore_errors: yes
+  failed_when: "helm_repo_list.rc != 0 and 'no repositories to show' not in helm_repo_list.stderr"
+
+- name: Check if Helm Repo is already registered
+  set_fact:
+    jq: "[?contains(name, {{ meta.repo_name }})]"
+    repo_already_registered: "{{  true if helm_repo_list.stdout | from_json | json_query(jq) else false}}"    
+  ignore_errors: yes
+  set_fact:
+    repo_already_registered: false
+    when: repo_already_registered is undefined
+
+- name: Register Helm Repo
+  kubernetes.core.helm_repository:
+    binary_path: "{{ helm_binary }}"
+    name: "{{ meta.repo_name }}"
+    repo_url: "{{ meta.repo_url }}"
+    repo_state: present
+  become: false
+  when: not repo_already_registered
