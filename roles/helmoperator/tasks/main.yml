@@ -1,9 +1,16 @@
 ---
+- name: Register repo
+  kubernetes.core.helm_repository:
+    binary_path: "{{ helm_binary }}"
+    name: "{{ meta.repo_name }}"
+    repo_url: "{{ meta.repo_url }}"
+    repo_state: present
+  become: false
 - name: Deploy chart from local path
   kubernetes.core.helm:
     binary_path: "{{ helm_binary }}"
     name: "{{ meta.chart_release_name }}"
-    chart_ref: "{{ meta.chart_source }}"
+    chart_ref: "{{ meta.repo_name }}/{{ meta.chart_name}}"
     chart_version: "{{ meta.chart_source_version | default(omit) }}"
     namespace: "{{ meta.helm_namespace }}" 
     create_namespace: true

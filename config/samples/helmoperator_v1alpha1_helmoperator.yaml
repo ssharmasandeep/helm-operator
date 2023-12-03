@@ -12,9 +12,10 @@ spec:
   meta:
     context: /opt/ansible/config 
     role: helmoperator
-    chart_release_name: test
-    chart_source: /opt/ansible/ueransim.tgz
-    chart_source_version: 1.0
+    chart_release_name: test 
+    chart_name: ueransim 
+    chart_version: 2.0.12
     helm_namespace: ueransim
-    role_path: /opt/ansible/
-
+    repo_name: myhelmrepo
+    repo_url: https://ssharmasandeep.github.com/myhelmrepo 
+    role_path: /opt/ansible
