@@ -1,8 +1,19 @@
 ---
+- name: Check if Helm is already installed
+  find:
+    paths: "{{ helm_install_path }}"
+    patterns: "helm"
+  register: helm_found
+
+- name: Set Helm already installed fact
+  set_fact:
+    helm_already_installed: "{{ true if helm_found.matched == 1 }}"
+
 - name: Init Helm folders
   file:
     path: "{{ helm_install_path }}"
     state: directory
+  when: not helm_already_installed
 
 - name: Unarchive Helm binary
   unarchive:
@@ -13,3 +24,4 @@
   delay: 5
   register: result
   until: result is not failed
+  when: not helm_already_installed

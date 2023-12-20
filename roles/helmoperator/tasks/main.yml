@@ -10,7 +10,8 @@
     chart_version: "{{ meta.chart_source_version | default(omit) }}"
     namespace: "{{ meta.helm_namespace }}" 
     create_namespace: true
-    kubeconfig: "{{ meta.context }}"
+    #kubeconfig: "{{ meta.context }}"
+    ca_cert: "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
     values_files:
       - "{{ meta.role_path }}/values.yaml"
   register: install
