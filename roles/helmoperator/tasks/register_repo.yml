@@ -20,5 +20,6 @@
     name: "{{ meta.repo_name }}"
     repo_url: "{{ meta.repo_url }}"
     repo_state: present
+  ignore_errors: yes
   become: false
   when: not repo_already_registered
