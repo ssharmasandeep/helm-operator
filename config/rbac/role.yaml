@@ -12,6 +12,7 @@ rules:
       - rbac.authorization.k8s.io
       - k8s.cni.cncf.io
       - cdi.kubevirt.io
+      - kubevirt.io
     resources:
       - "*" 
     verbs:
